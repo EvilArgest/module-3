@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Implements hook_theme().
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\Core\Url;
+
+/**
+ * Adding template files.
+ */
+function evilargest_theme($existing, $type, $theme, $path) : array {
+  return [
+    'evilargest-page' => [
+      'variables' => [
+        'form' => NULL,
+        'reviews' => NULL,
+        'pager' => NULL,
+      ],
+    ],
+    'evilargest' => [
+      'template' => 'evilargest',
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_template_preprocess_default_variables_alter().
+ */
+function template_preprocess_evilargest(&$variables) {
+  $variables['content'] = [];
+
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  $entity = $variables['elements']['#evilargest'];
+  $variables['button'] = [
+    '#type' => 'link',
+    '#title' => 'Manage',
+    '#url' => Url::fromRoute('entity.evilargest_review.edit', ['evilargest_review' => $entity->id()],),
+  ];
+
+  if (count($variables['content']['avatar']) <= 3) {
+    $variables['content']['avatar'] = [
+      '#theme' => 'image',
+      '#uri' => '/modules/custom/evilargest/files/default_image.png',
+      '#attributes' => [
+        'alt' => 'anonymous',
+        'width' => 150,
+        'height' => 150,
+      ],
+    ];
+  }
+  $variables['#attached']['library'][] = 'evilargest/evilargest_library';
+}

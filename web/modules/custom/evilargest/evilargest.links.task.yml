@@ -1,0 +1,16 @@
+# Define the 'local' links for the module
+
+evilargest.view:
+  route_name: entity.evilargest_review.canonical
+  base_route: entity.evilargest_review.canonical
+  title: View
+
+evilargest.edit:
+  route_name: entity.evilargest_review.edit
+  base_route: entity.evilargest_review.canonical
+  title: Edit
+
+evilargest.delete:
+  route_name: entity.evilargest_review.delete_form
+  base_route: entity.evilargest_review.canonical
+  title: Delete

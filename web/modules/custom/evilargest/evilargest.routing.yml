@@ -1,0 +1,39 @@
+evilargest:
+  path: '/evilargest/evilargest_review'
+  defaults:
+    _controller: '\Drupal\evilargest\Controller\MyEntityController::build'
+    _title: 'Entity module'
+  requirements:
+    _permission: 'access content'
+
+entity.evilargest_review.canonical:
+  path: '/evilargest/evilargest_review/{evilargest_review}'
+  defaults:
+    _entity_view: 'evilargest_review'
+    _title: 'Review itself'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.evilargest_review.edit_form:
+  path: '/evilargest/evilargest_review/{evilargest_review}/edit'
+  defaults:
+    _entity_form: 'evilargest_review.default'
+    _title: 'Edit review'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.evilargest_review.delete_form:
+  path: '/evilargest/evilargest_review/{evilargest_review}/delete'
+  defaults:
+    _entity_form: 'evilargest_review.delete'
+    _title: 'Delete review'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.evilargest_review.collection:
+  path: '/evilargest/evilargest_review/list'
+  defaults:
+    _entity_list: 'evilargest_review'
+    _title: 'List of reviews'
+  requirements:
+    _permission: 'administer contact entity'

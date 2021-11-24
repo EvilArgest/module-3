@@ -4,8 +4,10 @@ namespace Drupal\evilargest\Form;
 
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\MessageCommand;
+use Drupal\Core\Ajax\RedirectCommand;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 
 /**
  * Form for entity type.
@@ -17,7 +19,12 @@ class EntityForm extends ContentEntityForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildForm($form, $form_state);
-
+    $form['#prefix'] = '<div id="wrapper_wrapper"';
+    $form['#suffix'] = '</div>';
+    $form['actions']['submit']['#ajax'] = [
+      'callback' => '::setMessage',
+      'wrapper' => 'wrapper_wrapper',
+    ];
     $form['name']['widget'][0]['value']['#ajax'] = [
       'callback' => '::dynamicNameValidation',
       'disable-refocus' => TRUE,
@@ -48,65 +55,14 @@ class EntityForm extends ContentEntityForm {
   }
 
   /**
-   * Ajax name field validation.
+   * Submit Ajax.
    */
-  public function dynamicNameValidation(array $form, FormStateInterface $form_state): AjaxResponse {
-    $response = new AjaxResponse();
-    $name = $form_state->getValue('name')[0]['value'];
-    $namestrl = strlen($name);
-    if (($namestrl < 2 || $namestrl > 100)) {
-      $response->AddCommand(
-        new MessageCommand(
-          $this->t('The name must be in range of 2 to 100 symbols.'),
-          '.field--name-name',
-          [
-            'type' => 'error',
-          ]
-        )
-      );
+  public function setMessage(array &$form, FormStateInterface $form_state) {
+    if ($form_state->hasAnyErrors()) {
+      return $form;
     }
-    return $response;
-  }
-
-  /**
-   * Ajax email field validation.
-   */
-  public function dynamicEmailValidation(array $form, FormStateInterface $form_state): AjaxResponse {
     $response = new AjaxResponse();
-    $phone = $form_state->getValue('email')[0]['value'];
-    $pattern = '/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/';
-    if (!preg_match($pattern, $phone)) {
-      $response->addCommand(
-        new MessageCommand(
-          $this->t('Please, check your email.'),
-          '.field--name-email',
-          [
-            'type' => 'error',
-          ],
-        ),
-      );
-    }
-    return $response;
-  }
-
-  /**
-   * Ajax phone field validation.
-   */
-  public function dynamicPhoneValidation(array $form, FormStateInterface $form_state): AjaxResponse {
-    $response = new AjaxResponse();
-    $phone = $form_state->getValue('phone')[0]['value'];
-    $pattern = '/(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/';
-    if (!preg_match($pattern, $phone)) {
-      $response->addCommand(
-        new MessageCommand(
-          $this->t('Please, check your phone number.'),
-          '.field--name-phone',
-          [
-            'type' => 'error',
-          ],
-        ),
-      );
-    }
+    $response->addCommand(new RedirectCommand('/evilargest/evilargest_review'));
     return $response;
   }
 
@@ -119,4 +75,10 @@ class EntityForm extends ContentEntityForm {
     $entity = $this->getEntity();
     $entity->save();
   }
+
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    parent::submitForm($form, $form_state);
+    $form_state->setRedirect('evilargest_review');
+  }
+
 }

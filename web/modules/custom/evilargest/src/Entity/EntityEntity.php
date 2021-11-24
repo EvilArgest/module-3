@@ -16,7 +16,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   base_table = "evilargest_review",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "Reviews entity",
  *     "uuid" = "uuid",
  *   },
  *   handlers = {
@@ -25,9 +24,6 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *     "form" = {
  *       "default" = "Drupal\evilargest\Form\EntityForm",
  *       "delete" = "Drupal\evilargest\Form\EntityDelete",
- *     },
- *   "route_provider" = {
- *       "html" = "Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider",
  *     },
  *   },
  *   links = {

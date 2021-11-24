@@ -5,7 +5,7 @@ namespace Drupal\evilargest\Form;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Symfony\Component\Validator\Constraints\Url;
+use Drupal\Core\Url;
 
 /**
  * Deleting review.
@@ -30,7 +30,7 @@ class EntityDelete extends ContentEntityConfirmFormBase {
    * Confirming text.
    */
   public function getConfirmText(): TranslatableMarkup {
-    return $this->t('Cancel');
+    return $this->t('Yes');
   }
 
   /**
@@ -38,7 +38,7 @@ class EntityDelete extends ContentEntityConfirmFormBase {
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  public function deleteForm(array $form, FormStateInterface $form_state): void {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $entity = $this->entity;
     $entity->delete();
     $form_state->setRedirect('evilargest_review');

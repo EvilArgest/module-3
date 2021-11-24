@@ -1,4 +1,4 @@
-evilargest:
+evilargest_review:
   path: '/evilargest/evilargest_review'
   defaults:
     _controller: '\Drupal\evilargest\Controller\MyEntityController::build'
@@ -14,7 +14,7 @@ entity.evilargest_review.canonical:
   requirements:
     _permission: 'administer site configuration'
 
-entity.evilargest_review.edit_form:
+entity.evilargest_review.edit:
   path: '/evilargest/evilargest_review/{evilargest_review}/edit'
   defaults:
     _entity_form: 'evilargest_review.default'
@@ -29,11 +29,3 @@ entity.evilargest_review.delete_form:
     _title: 'Delete review'
   requirements:
     _permission: 'administer site configuration'
-
-entity.evilargest_review.collection:
-  path: '/evilargest/evilargest_review/list'
-  defaults:
-    _entity_list: 'evilargest_review'
-    _title: 'List of reviews'
-  requirements:
-    _permission: 'administer contact entity'

@@ -38,10 +38,7 @@ class MyEntityController extends ControllerBase {
   public function build(): array {
     $entity = $this->entityManager
       ->getStorage('evilargest_review')
-      ->create([
-        'entity_type' => 'node',
-        'entity' => 'evilargest_review',
-      ]);
+      ->create();
     $form = $this->formBuilder->getForm($entity, 'default');
 
     $storage = $this->entityManager->getStorage('evilargest_review');
@@ -53,6 +50,7 @@ class MyEntityController extends ControllerBase {
     ];
 
     $reviews = $query->execute();
+
     $review = $storage->loadMultiple($reviews);
     $get_view = $this->entityManager->getViewBuilder('evilargest_review');
     $render = $get_view->viewMultiple($review);

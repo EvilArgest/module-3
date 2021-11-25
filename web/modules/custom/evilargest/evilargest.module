@@ -51,8 +51,6 @@ function template_preprocess_evilargest_review(&$variables) {
       '#uri' => '/modules/custom/evilargest/files/default_image.png',
       '#attributes' => [
         'alt' => 'anonymous',
-        'width' => 150,
-        'height' => 150,
       ],
     ];
   }

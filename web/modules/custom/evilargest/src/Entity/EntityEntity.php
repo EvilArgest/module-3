@@ -68,6 +68,9 @@ class EntityEntity extends ContentEntityBase {
       ])
       ->setDisplayOptions('form', [
         'type' => 'string',
+        'settings' => [
+          'placeholder' => 'Enter your name',
+        ],
       ])
       ->setDisplayOptions('view', [
         'label' => 'hidden',

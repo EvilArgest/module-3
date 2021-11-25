@@ -19,14 +19,13 @@ class EntityForm extends ContentEntityForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
     $form = parent::buildForm($form, $form_state);
-    $form['#prefix'] = '<div id="wrapper_wrapper"';
+    $form['#prefix'] = '<div id="form_wrapper"';
     $form['#suffix'] = '</div>';
     $form['actions']['submit']['#ajax'] = [
       'callback' => '::setMessage',
-      'wrapper' => 'wrapper_wrapper',
+      'wrapper' => 'form_wrapper',
     ];
     $form['name']['widget'][0]['value']['#ajax'] = [
-      'callback' => '::dynamicNameValidation',
       'disable-refocus' => TRUE,
       'event' => 'finishedinput',
       'progress' => [
@@ -35,7 +34,6 @@ class EntityForm extends ContentEntityForm {
     ];
 
     $form['email']['widget'][0]['value']['#ajax'] = [
-      'callback' => '::dynamicEmailValidation',
       'disable-refocus' => TRUE,
       'event' => 'finishedinput',
       'progress' => [
@@ -44,14 +42,16 @@ class EntityForm extends ContentEntityForm {
     ];
 
     $form['phone']['widget'][0]['value']['#ajax'] = [
-      'callback' => '::dynamicPhoneValidation',
       'disable-refocus' => TRUE,
       'event' => 'finishedinput',
       'progress' => [
         'type' => 'none',
       ],
     ];
+    $form['actions']['submit']['#value'] = $this->t('Submit');
+
     return $form;
+
   }
 
   /**

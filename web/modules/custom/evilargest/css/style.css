@@ -1,0 +1,64 @@
+.navbar.navbar-default.container {
+  display: flex;
+  justify-content: center;
+  background-color: black;
+}
+.region.region-navigation .page-header {
+  border: none;
+  padding: 0;
+  margin: 15px 0;
+  color: #096caf;
+}
+.evilargest-review-form .control-label {
+  color: #096caf;
+}
+.evilargest-review-form {
+  width: 500px;
+  margin: 0 auto;
+}
+.evilargest-review-form .form-item {
+  text-align: center;
+}
+.evilargest-review-form .form-submit {
+  display: block;
+  margin: 0 auto;
+  background-color: #0b82f9;
+  border-color: #0b82f9;
+  height: 46px;
+  width: 120px;
+}
+#form_wrapper {
+  margin-bottom: 80px;
+}
+.user_table {
+  display: flex;
+  margin: 0 auto 85px;
+  justify-content: center;
+}
+.user_table .review_avatar {
+  width: 70px;
+  height: 70px;
+}
+.review_image {
+  width: 200px;
+  margin-left: auto;
+}
+.user_info {
+  display: flex;
+  margin-right: auto;
+}
+.user_right {
+  margin-left: 15px;
+  line-height: 17px;
+  margin-top: -12px;
+}
+.user_content {
+  display: flex;
+  width: 700px;
+}
+.field--name-textmessage {
+  max-width: 500px;
+}
+#form_wrapper .form-actions .btn, .form-actions .btn-group {
+  margin: 0 auto;
+}
